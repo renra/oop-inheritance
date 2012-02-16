@@ -7,16 +7,18 @@ var setStatic = inheritance.setStatic
 
 
 /* Data setup */
-var Ancestor = function(){}
-var Descendant = function(){}
-Descendant.type = 'descendant';
-Descendant.prototype.makeFire = function(){
-  return this.class.type + ' uses electri'
-}
-
-var makeFireDesc = 'rubs two wood pieces against each other';
-var useElectricityDesc = 'bangs piezoelectric crystals';
+var makeFireDesc = 'rubs two wood pieces against each other'
+var useElectricityDesc = 'bangs piezoelectric crystals'
+var useVizualizationDesc = 'imagines fire in his mind eye and lets the Force work for him'
 var existenceDesc = 'is';
+
+var Ancestor = function(){}
+
+var Descendant = function(){}
+Descendant.type = 'descendant'
+
+var WingMaker = function(){}
+WingMaker.type = 'wingMaker'
 
 setStatic(Ancestor, {
   type: 'ancestor',
@@ -40,9 +42,19 @@ Descendant.prototype = {
   }
 }
 
+WingMaker.prototype = {
+  class : WingMaker,
+  makeFire : function(){
+    return this.class.type + ' ' + useVizualizationDesc;
+  }
+}
+
 inherit(Descendant, Ancestor);
+inherit(WingMaker, Descendant);
+
 var nestor = new Ancestor();
 var tesla = new Descendant();
+var shan = new WingMaker();
 /**/
 
 
@@ -90,6 +102,17 @@ test('Descendant.ancestor', Descendant.ancestor, Ancestor)
 
 test('tesla.makeFire()', tesla.makeFire(), 'descendant ' + useElectricityDesc)
 test('tesla.ancestor', tesla.ancestor, Ancestor)
+test('tesla.class', tesla.class, Descendant)
+
+Descendant.count++
+test('WingMaker.type', WingMaker.type, 'wingMaker')
+test('WingMaker.exists()', WingMaker.exists(), 'wingMaker is')
+test('WingMaker.count', WingMaker.count, 0)
+test('WingMaker.ancestor', WingMaker.ancestor, Descendant)
+
+test('shan.makeFire()', shan.makeFire(), 'wingMaker ' + useVizualizationDesc);
+test('shan.ancestor', shan.ancestor, Descendant)
+test('shan.class', shan.class, WingMaker)
 /**/
 
 console.log(testCount + ' tests. ' + failureCount + ' failed. ' + successCount + ' succeeded.')
