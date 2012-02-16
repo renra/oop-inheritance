@@ -10,6 +10,7 @@ var setStatic = inheritance.setStatic
 var makeFireDesc = 'rubs two wood pieces against each other'
 var useElectricityDesc = 'bangs piezoelectric crystals'
 var useVizualizationDesc = 'imagines fire in his mind eye and lets the Force work for him'
+var isDancingDesc = 'is just dancing a waltz'
 var existenceDesc = 'is';
 
 var Ancestor = function(){}
@@ -39,6 +40,9 @@ Descendant.prototype = {
   class : Descendant,
   makeFire : function(){
     return this.class.type + ' ' + useElectricityDesc;
+  },
+  danceWaltz : function(){
+    return this.class.type + ' ' + isDancingDesc
   }
 }
 
@@ -103,6 +107,7 @@ test('Descendant.ancestor', Descendant.ancestor, Ancestor)
 test('tesla.makeFire()', tesla.makeFire(), 'descendant ' + useElectricityDesc)
 test('tesla.ancestor', tesla.ancestor, Ancestor)
 test('tesla.class', tesla.class, Descendant)
+test('tesla.danceWaltz()', tesla.danceWaltz(), 'descendant ' + isDancingDesc)
 
 Descendant.count++
 test('WingMaker.type', WingMaker.type, 'wingMaker')
@@ -113,6 +118,7 @@ test('WingMaker.ancestor', WingMaker.ancestor, Descendant)
 test('shan.makeFire()', shan.makeFire(), 'wingMaker ' + useVizualizationDesc);
 test('shan.ancestor', shan.ancestor, Descendant)
 test('shan.class', shan.class, WingMaker)
+test('shan.danceWaltz()', shan.danceWaltz(), 'wingMaker ' + isDancingDesc)
 /**/
 
 console.log(testCount + ' tests. ' + failureCount + ' failed. ' + successCount + ' succeeded.')
