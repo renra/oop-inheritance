@@ -1,47 +1,58 @@
-var util = require('util');
-
-var inherit = function(to, from){
-  util.inherits(to, from)
-  static(to, from.static)
-  to.ancestor = from
+var inherit = function(target, source){
+  inheritPrototype(target, source);
+  inheritStatic(target, source);
+  target.ancestor = source;
+  target.prototype.ancestor = source
 }
 
-var static = function(target, propsNFuns){
-  target.static = propsNFuns;
-  for(var key in propsNFuns){
-    if(propsNFuns.hasOwnProperty(key) && target[key] === undefined){
-      target[key] = propsNFuns[key]
+// Inherit instance methods
+// don't overwrite anything that is already defined
+var inheritPrototype = function(target, source){
+  if(target.prototype == null){
+    target.prototype = {}
+  }
+
+  for(var key in source.prototype){
+    if(source.prototype.hasOwnProperty(key) && target.prototype[key] === undefined){
+      target.prototype[key] = source.prototype[key];
     }
   }
 }
 
-//Class stuff
-var Ancestor = function(){}
-static(Ancestor, {
-  type : 'ancestor',
-  foo : function(){
-    console.log( 'Yea! A static function. Says the : ' + this.type )
-  },
-  count : 0
-});
 
-//Instance stuff
-Ancestor.prototype.bar = function(){ util.puts('I say bar') }
-console.log(Ancestor);
-Ancestor.foo();
-console.log(Ancestor.type);
+// Inherit class methods with the same care
+var inheritStatic = function(target, source){
+  if(target.static == null){
+    target.static = {}
+  }
 
-var Descendant = function(){}
-static(Descendant, { type: 'descendant' })
-inherit(Descendant, Ancestor)
+  for(var key in source.static){
+    if(source.static.hasOwnProperty(key)){
+      if(target[key] == null){
+        target[key] = source.static[key];
+        target.static[key] = source[key];
+      }
+      else{
+        target.static[key] = target[key];
+      }
+    }
+  }
+}
 
-Descendant.foo();
-console.log(Descendant.type);
-var desc = new Descendant()
-desc.bar();
+var setStatic = function(target, propsNDefs){
+  if(target.static == null){
+    target.static = {}
+  }
 
-Descendant.count++
-util.puts(Descendant.count)
-util.puts(Ancestor.count)
+  for(var key in propsNDefs){
+    if(propsNDefs.hasOwnProperty(key) && target.static[key] === undefined){
+      target.static[key] = propsNDefs[key];
+      target[key] = target.static[key]
+    }
+  }
+}
 
-console.log(Descendant.ancestor.type);
+exports.inherit = inherit
+exports.inheritPrototype = inheritPrototype
+exports.inheritStatic = inheritStatic
+exports.setStatic = setStatic
