@@ -1,6 +1,8 @@
 var inherit = function(target, source){
   inheritPrototype(target, source);
   inheritStatic(target, source);
+
+  // Leave a trace
   target.ancestor = source;
   target.prototype.ancestor = source
 }
