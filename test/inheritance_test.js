@@ -19,6 +19,7 @@ var Descendant = function(){}
 Descendant.type = 'descendant'
 
 var WingMaker = function(){}
+
 WingMaker.type = 'wingMaker'
 
 Ancestor.prototype = {
