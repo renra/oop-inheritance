@@ -5,6 +5,7 @@ var inherit = function(target, source){
   // Leave a trace
   target.ancestor = source;
   target.prototype.ancestor = source
+  target.prototype.class = target
 
   // Give them the tools to follow the trace
   target.ancestors = ancestors
@@ -12,7 +13,6 @@ var inherit = function(target, source){
   target.prototype.ancestors = ancestors
   target.prototype.ancestorTypes = ancestorTypes
   target.prototype.superFunction = superFunction
-  
 }
 
 // Inherit instance methods
@@ -49,6 +49,7 @@ var inheritStatic = function(target, source){
   }
 }
 
+// Head of the hierarchy initialization helper
 var setStatic = function(target, propsNDefs){
   if(target.static == null){
     target.static = {}
@@ -60,6 +61,8 @@ var setStatic = function(target, propsNDefs){
       target[key] = target.static[key]
     }
   }
+
+  target.prototype.class = target
 }
 
 var ancestors = function(){
@@ -68,7 +71,7 @@ var ancestors = function(){
 
   while( iter ){
     _ancestors.push(iter);
-    iter = iter.ancestor;
+    iter = iter === iter.ancestor ? null : iter.ancestor
   }
   
   return _ancestors;

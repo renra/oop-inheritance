@@ -1,6 +1,6 @@
 #A module to provide a functionality as close to the standard OOP inheritance as possible with a bit of my own invention
 
-The descendant's attributes and functions are not overwritten by those of the ancestor at the time of copying ts functions
+The descendant's attributes and functions are not overwritten by those of the ancestor at the time of copying its functions
 For Multiple hierarchical inheritance - think twice before you use it. You might be much better off using mixins
 
 
