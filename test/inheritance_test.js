@@ -77,8 +77,24 @@ var test = function(subject, token, expectation){
     successCount++;
   }
   catch(err){
-    failureCount++;
-    console.log(err);
+    failureCount++
+    console.log(err)
+  }
+}
+
+var testArray = function(subject, token, expectation){
+  testCount++
+  try{
+    for(var i in expectation){
+      if(token[i] !== expectation[i]){
+        throw new Error(subject + ' should be: <<' + expectation + '>> but is: <<' + token + '>> instead.')
+      }
+    }
+    successCount++
+  }
+  catch(err){
+    failureCount++
+    console.log(err)
   }
 }
 /**/
@@ -113,12 +129,19 @@ Descendant.count++
 test('WingMaker.type', WingMaker.type, 'wingMaker')
 test('WingMaker.exists()', WingMaker.exists(), 'wingMaker is')
 test('WingMaker.count', WingMaker.count, 0)
-test('WingMaker.ancestor', WingMaker.ancestor, Descendant)
+test('WingMaker.ancestor', WingMaker.ancestor, Descendant);
+testArray('WingMaker.ancestors()', WingMaker.ancestors(), [WingMaker.ancestor, Descendant.ancestor])
+testArray('WingMaker.ancestorTypes()', WingMaker.ancestorTypes(), ['descendant', 'ancestor'])
 
 test('shan.makeFire()', shan.makeFire(), 'wingMaker ' + useVizualizationDesc);
 test('shan.ancestor', shan.ancestor, Descendant)
 test('shan.class', shan.class, WingMaker)
 test('shan.danceWaltz()', shan.danceWaltz(), 'wingMaker ' + isDancingDesc)
+testArray('shan.ancestors()', shan.ancestors(), [Descendant, Ancestor])
+testArray('shan.ancestorTypes()', shan.ancestors(), [Descendant, Ancestor])
+
+test('shan.superFunction("makeFire")', shan.superFunction('makeFire', 1, 2, 3), 'wingMaker ' + useElectricityDesc)
+test('shan.superFunction("nonExistent")', shan.superFunction('nonExistent'), null)
 /**/
 
 console.log(testCount + ' tests. ' + failureCount + ' failed. ' + successCount + ' succeeded.')

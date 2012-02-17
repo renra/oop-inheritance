@@ -5,6 +5,14 @@ var inherit = function(target, source){
   // Leave a trace
   target.ancestor = source;
   target.prototype.ancestor = source
+
+  // Give them the tools to follow the trace
+  target.ancestors = ancestors
+  target.ancestorTypes = ancestorTypes
+  target.prototype.ancestors = ancestors
+  target.prototype.ancestorTypes = ancestorTypes
+  target.prototype.superFunction = superFunction
+  
 }
 
 // Inherit instance methods
@@ -47,11 +55,48 @@ var setStatic = function(target, propsNDefs){
   }
 
   for(var key in propsNDefs){
-    if(propsNDefs.hasOwnProperty(key) && target.static[key] === undefined){
+    if(propsNDefs.hasOwnProperty(key) && target.static[key] == null){
       target.static[key] = propsNDefs[key];
       target[key] = target.static[key]
     }
   }
+}
+
+var ancestors = function(){
+  var _ancestors = [];
+  var iter = this.ancestor;
+
+  while( iter ){
+    _ancestors.push(iter);
+    iter = iter.ancestor;
+  }
+  
+  return _ancestors;
+}
+
+var ancestorTypes = function(){
+  var _ancestorTypes = [];
+  var ancestors = this.ancestors();
+
+  for(var i in ancestors){
+    _ancestorTypes.push(ancestors[i].type);
+  }
+ 
+  return _ancestorTypes;
+}
+
+var superFunction = function(functionName){
+  var retval = null;
+
+  if(this.__ghost == null){
+    // And the ghost of the ancestors will be with you forever
+    this.__ghost = new this.ancestor()
+  }
+
+  if(this.__ghost[functionName]){
+    retval = this.__ghost[functionName].call(this)
+  }
+  return retval;
 }
 
 exports.inherit = inherit
