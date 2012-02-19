@@ -4,6 +4,7 @@ The descendant's attributes and functions are not overwritten by those of the an
 For Multiple hierarchical inheritance - think twice before you use it. You might be much better off using mixins
 
 ###TODO
+- Make some examples( For now see the test for usage examples )
 - Passing arguments to the superFunction
 
 ###Features
@@ -17,7 +18,4 @@ For Multiple hierarchical inheritance - think twice before you use it. You might
 
 - The head of the hierarchy chain can be created manually or using the setStatic function. Manual creation means to assign its "static" property a JSON of desired properties and functions and assigning the object itself to its prototype.class. That value will be used as a reference by its instances. If you use the setStatic helper and still want to assign some values to the object's prototype, beware that setStatic assigns the class to the object's prototype automatically so it's a good idea to first tweak the prototype and only then call setStatic so that the class is not overwritten.
 
-- You can inherit from many sources at the same time. In case of name collisions, the function or property that is defined first, is always preserved but the ancestors are updated, which leads to interesting implications. See Shifting. As of yet, backtracking(nor superfunctions reliably) does not reasonably work with multiple inheritance. The object will always be "aware" of only one branch of its ancestors.
-
-### Private, protected and public
-I omitted these modifiers from this package simply because I don't use them(Gasp!!!). The ruby world has taught me that it is not a bad thing to allow the programmer do whatever s/he wants even from the outside of the class. It is not dangerous as I had been told. Nor does it cause trouble. Every restriction that you place in your code is a restriction you place upon yourself while debugging it. It may be a good idea sometimes, but I can usually go without it. So I decided not to support it.
+- You can inherit from many sources at the same time. In case of name collisions, the function or property that is defined first, is always preserved but the ancestor will ne updated. As of yet, backtracking(nor superfunctions reliably) does not reasonably work with multiple inheritance. The object will always be "aware" of only one branch of its ancestors.
