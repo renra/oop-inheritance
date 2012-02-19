@@ -1,0 +1,19 @@
+{
+  "author": "Jan Gloser <jan.renra.gloser@gmail.com>",
+  "name": "oop-inheritance",
+  "description": "Inheritance package",
+  "version": "0.0.0",
+  "homepage": "https://github.com/renra/oop-inheritance",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/renra/oop-inheritance.git"
+  },
+  "scripts": {
+    "test": "node test/inheritance_test.js"
+  },
+  "engines": {
+    "node": "~0.6.7"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
