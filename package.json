@@ -2,7 +2,7 @@
   "author": "Jan Gloser <jan.renra.gloser@gmail.com>",
   "name": "oop-inheritance",
   "description": "Inheritance package",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "homepage": "https://github.com/renra/oop-inheritance",
   "repository": {
     "type": "git",
