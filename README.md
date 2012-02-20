@@ -3,6 +3,12 @@
 The descendant's attributes and functions are not overwritten by those of the ancestor at the time of copying its functions
 For Multiple hierarchical inheritance - think twice before you use it. You might be much better off using mixins.
 
+###Installation 
+```
+npm install oop-inheritance
+```
+
+
 ###TODO
 - Make some examples( For now see the test for usage examples )
 - Passing arguments to the superFunction
