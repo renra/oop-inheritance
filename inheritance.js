@@ -90,14 +90,22 @@ var ancestorTypes = function(){
 
 var superFunction = function(functionName){
   var retval = null;
+  var args = [];
 
   if(this.__ghost == null){
     // And the ghost of the ancestors will be with you forever
     this.__ghost = new this.ancestor()
   }
 
+  //TODO : consider underscore
+  for(var i in arguments){
+    if( i > 0 ){
+      args.push(arguments[i])
+    }
+  }
+
   if(this.__ghost[functionName]){
-    retval = this.__ghost[functionName].call(this)
+    retval = this.__ghost[functionName].apply(this, args)
   }
   return retval;
 }

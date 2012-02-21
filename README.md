@@ -11,14 +11,13 @@ npm install oop-inheritance
 
 ###TODO
 - Make some examples( For now see the test for usage examples )
-- Passing arguments to the superFunction
 
 ###Features
 - Static properties and functions are seamlessly inherited together with the instance ones.
 
 - Instances have a reference to their class and thus can call static functions via that class and build the whole hierarchical tree.
 
-- Instances have a special superFunction function that is PUBLIC and calls the method of their direct ancestor with the context of the instance. The superFunction is just a helper that instantiates an ancestor and calls on it the required method. You could do this manually using the ancestor property. I chose to leave these things public. 
+- Instances have a special superFunction function that is PUBLIC and calls the method of their direct ancestor with the context of the instance. The superFunction is just a helper that instantiates an ancestor and calls on it the required method. You could do this manually using the ancestor property. I chose to leave these things public. You can call any super function from any function you define on your descendant(You're not limited to the function of the same name).
 
 - Already defined functions and properties are not overwritten at the time of inheritance. That means if you define your class first and inherit later, your polymorphic functions will be preserved.
 

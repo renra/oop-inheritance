@@ -42,6 +42,9 @@ Descendant.prototype = {
   },
   danceWaltz : function(){
     return this.class.type + ' ' + isDancingDesc
+  },
+  subtract : function(a, b){
+    return this.class.type + ' says the result is ' + (a-b)
   }
 }
 
@@ -61,7 +64,7 @@ var shan = new WingMaker();
 
 
 
-/* Testing method */
+/* Testing methods */
 var testCount = 0;
 var successCount = 0;
 var failureCount = 0;
@@ -83,7 +86,7 @@ var testArray = function(subject, token, expectation){
 
   for(var i in expectation){
     if(token[i] !== expectation[i]){
-      console.log(subject + ' should be: <<' + expectation + '>> but is: <<' + token + '>> instead.')
+      console.log(subject + ' on index ' + i + ' should be: <<' + expectation + '>> but is: <<' + token + '>> instead.')
       failureCount++
       break
     }
@@ -134,12 +137,14 @@ test('shan.danceWaltz()', shan.danceWaltz(), 'wingMaker ' + isDancingDesc)
 testArray('shan.ancestors()', shan.ancestors(), [Descendant, Ancestor])
 testArray('shan.ancestorTypes()', shan.ancestors(), [Descendant, Ancestor])
 
-test('shan.superFunction("makeFire")', shan.superFunction('makeFire', 1, 2, 3), 'wingMaker ' + useElectricityDesc)
+test('shan.superFunction("makeFire")', shan.superFunction('makeFire'), 'wingMaker ' + useElectricityDesc)
 test('shan.superFunction("nonExistent")', shan.superFunction('nonExistent'), null)
 
 WingMaker.ancestor = WingMaker
 testArray('Wingmaker.ancestors()', WingMaker.ancestors(), [])
 WingMaker.ancestor = Descendant
+
+test('shan.superFunction("subtract", 5, 4)', shan.superFunction('subtract', 5, 4), 'wingMaker says the result is 1')
 /**/
 
 console.log(testCount + ' tests. ' + failureCount + ' failed. ' + successCount + ' succeeded.')
