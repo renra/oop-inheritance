@@ -19,7 +19,6 @@ var Descendant = function(){}
 Descendant.type = 'descendant'
 
 var WingMaker = function(){}
-
 WingMaker.type = 'wingMaker'
 
 Ancestor.prototype = {
@@ -134,8 +133,8 @@ test('shan.makeFire()', shan.makeFire(), 'wingMaker ' + useVizualizationDesc);
 test('shan.ancestor', shan.ancestor, Descendant)
 test('shan.class', shan.class, WingMaker)
 test('shan.danceWaltz()', shan.danceWaltz(), 'wingMaker ' + isDancingDesc)
+test('shan.subtract(5, 4)', shan.subtract(5, 4), 'wingMaker says the result is 1')
 testArray('shan.ancestors()', shan.ancestors(), [Descendant, Ancestor])
-testArray('shan.ancestorTypes()', shan.ancestors(), [Descendant, Ancestor])
 
 test('shan.superFunction("makeFire")', shan.superFunction('makeFire'), 'wingMaker ' + useElectricityDesc)
 test('shan.superFunction("nonExistent")', shan.superFunction('nonExistent'), null)
