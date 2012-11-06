@@ -4,6 +4,7 @@
   "description": "Inheritance package",
   "version": "1.0.0",
   "homepage": "https://github.com/renra/oop-inheritance",
+  "main": "./inheritance.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/renra/oop-inheritance.git"
