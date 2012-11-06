@@ -115,6 +115,7 @@ test('Descendant.type', Descendant.type, 'descendant')
 test('Descendant.exists()', Descendant.exists(), 'descendant is')
 test('Descendant.count', Descendant.count, 0)
 test('Descendant.ancestor', Descendant.ancestor, Ancestor)
+test('Descendant.superFunction("exists")', Descendant.superFunction('exists'), 'descendant is');
 
 test('tesla.makeFire()', tesla.makeFire(), 'descendant ' + useElectricityDesc)
 test('tesla.ancestor', tesla.ancestor, Ancestor)
@@ -125,11 +126,11 @@ Descendant.count++
 test('WingMaker.type', WingMaker.type, 'wingMaker')
 test('WingMaker.exists()', WingMaker.exists(), 'wingMaker is')
 test('WingMaker.count', WingMaker.count, 0)
-test('WingMaker.ancestor', WingMaker.ancestor, Descendant);
+test('WingMaker.ancestor', WingMaker.ancestor, Descendant)
 testArray('WingMaker.ancestors()', WingMaker.ancestors(), [WingMaker.ancestor, Descendant.ancestor])
 testArray('WingMaker.ancestorTypes()', WingMaker.ancestorTypes(), ['descendant', 'ancestor'])
 
-test('shan.makeFire()', shan.makeFire(), 'wingMaker ' + useVizualizationDesc);
+test('shan.makeFire()', shan.makeFire(), 'wingMaker ' + useVizualizationDesc)
 test('shan.ancestor', shan.ancestor, Descendant)
 test('shan.class', shan.class, WingMaker)
 test('shan.danceWaltz()', shan.danceWaltz(), 'wingMaker ' + isDancingDesc)

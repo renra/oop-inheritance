@@ -32,6 +32,8 @@ var inheritPrototype = function(target, source){
 
 // Inherit class methods with the same care
 var inheritStatic = function(target, source){
+  target.superFunction = superStaticFunction
+
   if(target.static == null){
     target.static = {}
   }
@@ -73,7 +75,7 @@ var ancestors = function(){
     _ancestors.push(iter);
     iter = iter === iter.ancestor ? null : iter.ancestor
   }
-  
+
   return _ancestors;
 }
 
@@ -84,7 +86,7 @@ var ancestorTypes = function(){
   for(var i in ancestors){
     _ancestorTypes.push(ancestors[i].type);
   }
- 
+
   return _ancestorTypes;
 }
 
@@ -108,6 +110,24 @@ var superFunction = function(functionName){
     retval = this.__ghost[functionName].apply(this, args)
   }
   return retval;
+}
+
+var superStaticFunction = function(functionName){
+  var retval = null;
+  var args = [];
+
+  //TODO : consider underscore
+  for(var i in arguments){
+    if( i > 0 ){
+      args.push(arguments[i])
+    }
+  }
+
+  if(this.ancestor[functionName]){
+    retval = this.ancestor[functionName].apply(this, args)
+  }
+
+  return retval
 }
 
 exports.inherit = inherit
